@@ -19,14 +19,14 @@ body{
     height: 100vh;
 }
 .container{
-background: rgb(224, 212, 157);
+background: rgb(255, 242, 186);
 height: 600px;
-width: 373px;
+width: 435px;
 margin-top: 32px;
 padding: 12px 25px;
 border-radius: 34px;
 border: 4.5px solid black;
-box-shadow:8px 10px  rgb(114, 78, 138); ;
+box-shadow:10px 10px  rgb(114, 78, 138); ;
 }
 .headerTodo{
     display: flex;
@@ -40,8 +40,42 @@ box-shadow:8px 10px  rgb(114, 78, 138); ;
 .headerTodo span img{
     width: 71px;
 }
-.headerTodo span{
-    /* background: #000; */
-    /* width: 23px ; */
-    /* display: block; */
+/*~ inut sreachh */
+.inputSreach{
+    margin-bottom: 19px;
+}
+.inputSreach input{
+ padding: 8px;
+ background: transparent;
+ font-size: 23px;
+ font-weight: bold;
+ width: 100%;
+ outline: none;
+ border:5px solid  black ;
+ border-radius: 22px;
+
+}
+/* ~~ status */
+.status{
+
+    padding: 7px;
+}
+.statusBTN{
+    font-size: 27px;
+    padding: 6px;
+    width: 110px;
+    margin:0 4px ;
+    border-radius: 15px;
+    font-weight: bold;
+    border: 3px solid black;
+    cursor: pointer;
+}
+.all{
+background: #45c7ff;
+}
+.active{
+    background: #fda0ff;
+}
+.campleted{
+    background: #6bff72;
 }
