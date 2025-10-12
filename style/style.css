@@ -132,11 +132,14 @@ background: #45c7ff;
     margin-top: 23px;
     border: 4px solid black;
     border-radius: 23px;
+
+    
 }
 .containerList ul{
-    /* background: black; */
-    color: rgb(0, 0, 0);
-    /* padding: 4px; */
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
 }
 .containerList ul li{
    /* background: red; */
@@ -147,6 +150,7 @@ background: #45c7ff;
     display: flex;
     align-items: center;
     cursor: pointer;
+    scroll-snap-align: start;
 }
 .containerList ul li .check{
     border-radius: 50%;
@@ -248,4 +252,5 @@ background: #45c7ff;
   
 
  }
- 
+ /* loading animation */
+ /* HTML: <div class="loader"></div> */
