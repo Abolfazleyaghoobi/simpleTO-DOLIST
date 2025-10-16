@@ -14,16 +14,16 @@ export const isCompleted = async (id, li) => {
         targetTask.isCompleted = !targetTask.isCompleted;
         console.log("done");
         span.innerHTML=`<i class="bi bi-check"></i>`;
-        h3.style.textDecoration="line-through";
-        li.style.backgroundColor="#ccffc3";
+        h3.classList.add("khat");
+        li.classList.add("completed");
     }
     else{
         
         targetTask.isCompleted = !targetTask.isCompleted;
         console.log("undone");
         span.innerHTML=``;
-        h3.style.textDecoration="none";
-        li.style.backgroundColor="";
+        h3.classList.remove("khat");
+        li.classList.remove("completed");
     }
     await updateTask(targetTask);
   } else {

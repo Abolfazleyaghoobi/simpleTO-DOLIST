@@ -1,13 +1,13 @@
 import { initDB, showTask } from "./todoDB.js";
 const elem=(e)=>{
     return`
-    <li id=${e.id}>
+    <li id=${e.id} class=${e.isCompleted&&"completed"}>
     <div class="check">
     <span>
-    
+      ${e.isCompleted?`<i class="bi bi-check"></i>`:""}
     </span>
     </div>
-    <h3>${e.contentTask}</h3>
+    <h3 class=${e.isCompleted&&"khat"}>${e.contentTask}</h3>
     <div class="deletIcon"><i class="bi bi-trash3"></i></div>
     </li>
     `

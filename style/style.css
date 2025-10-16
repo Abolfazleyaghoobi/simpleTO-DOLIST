@@ -264,3 +264,9 @@ background: #45c7ff;
     position: absolute;
     right: 12px;
  }
+.khat{
+    text-decoration: line-through;
+}
+.completed{
+    background: #ccffc3;
+}
