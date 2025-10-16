@@ -1,4 +1,4 @@
-    let db;
+let db;
 
 function initDB() {
   return new Promise((res, rej) => {
@@ -7,24 +7,18 @@ function initDB() {
     todoDB.addEventListener("error", (e) => {
       console.log("error");
     });
-    // ~ successfully 
-    todoDB.addEventListener("success", (e) => {
-      console.log("database opened  successfully");
-      db = todoDB.result;
 
-      showTask();
-      res(db)
+    todoDB.addEventListener("success", (e) => {
+      console.log("database opened successfully");
+      db = todoDB.result;
+      res(db);
     });
-    // %% upgrade db
+
     todoDB.addEventListener("upgradeneeded", (e) => {
       let db = e.target.result;
-      let objectStore = db.createObjectStore("contentTask", {
+      db.createObjectStore("contentTask", {
         keyPath: "id",
         autoIncrement: true,
-      });
-
-      objectStore.createIndex("contentTask", "contentTask", {
-        unique: false,
       });
     });
   });
@@ -33,17 +27,13 @@ function initDB() {
 function addToDB(inputValue) {
   let newItem = {
     contentTask: inputValue,
+    isCompleted: false,
   };
   let transaction = db.transaction(["contentTask"], "readwrite");
   let objectStore = transaction.objectStore("contentTask");
-  let result = objectStore.add(newItem);
-  transaction.addEventListener("complete", () => {
-    console.log("successflly");
-  });
-  transaction.addEventListener("error", () => {
-    console.log("error");
-  });
+  objectStore.add(newItem);
 }
+
 function showTask() {
   return new Promise((res, rej) => {
     let resultShowTask = [];
@@ -52,7 +42,6 @@ function showTask() {
       let cursor = e.target.result;
       if (cursor) {
         resultShowTask.push(cursor.value);
-
         cursor.continue();
       } else {
         res(resultShowTask);
@@ -61,4 +50,23 @@ function showTask() {
   });
 }
 
-export { addToDB, showTask ,initDB};
+// ✅ تابع جدید برای آپدیت
+function updateTask(task) {
+  return new Promise((res, rej) => {
+    let transaction = db.transaction(["contentTask"], "readwrite");
+    let objectStore = transaction.objectStore("contentTask");
+    let request = objectStore.put(task);
+
+    request.onsuccess = () => {
+      console.log("Task updated successfully ✅");
+      res();
+    };
+
+    request.onerror = (e) => {
+      console.error("Error updating task ❌", e);
+      rej(e);
+    };
+  });
+}
+
+export { initDB, showTask, addToDB, updateTask };
