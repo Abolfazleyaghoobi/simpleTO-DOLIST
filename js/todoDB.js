@@ -68,5 +68,25 @@ function updateTask(task) {
     };
   });
 }
+function removeTask(id) {
+  return new Promise((res, rej) => {
+    const transaction = db.transaction(["contentTask"], "readwrite");
+    const objectStore = transaction.objectStore("contentTask");
 
-export { initDB, showTask, addToDB, updateTask };
+    const request = objectStore.delete(Number(id));
+
+    request.onsuccess = () => {
+      console.log(`Task with id ${id} deleted successfully ✅`);
+      res();
+    };
+
+    request.onerror = (e) => {
+      console.error("Error deleting task ❌", e);
+      rej(e);
+    };
+  });
+}
+
+
+
+export { initDB, showTask, addToDB, updateTask,removeTask };

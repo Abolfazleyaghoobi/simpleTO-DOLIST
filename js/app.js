@@ -1,6 +1,7 @@
 import { addToDB, initDB } from "./todoDB.js";
 import { isCompleted } from "./isCompleted.js";
 import { showTaskT } from "./show.js";
+import { remove } from "./remove.js";
 //@ inputea
 const inputAdd = document.querySelector(".InputAddTodoList>input");
 //@ Add btn todo
@@ -71,20 +72,14 @@ closeBtn.addEventListener("click", (e) => {
   });
 // @ campleted task
 ul.addEventListener("click", (e) => {
-   const nodeName=e.target.nodeName;
-
+  const li = e.target.closest("li");
+  if (!li) return;
   
-     const li=e.target.closest("li");
-     isCompleted(li.id,li);
-    
-    // if(s){
-        
-    // }else{
-    //     
-    // }
+  isCompleted(li.id, li);
+  remove(li.id, li);
+});
 
-  
-})
+
 //@ get task index db and show 
 
 // let isCampleted = false;
