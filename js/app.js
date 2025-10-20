@@ -2,17 +2,26 @@ import { addToDB, initDB } from "./todoDB.js";
 import { isCompleted } from "./isCompleted.js";
 import { showTaskT } from "./show.js";
 import { remove } from "./remove.js";
+import showActiveTask from "./showActive.js";
 //@ inputea
 const inputAdd = document.querySelector(".InputAddTodoList>input");
 //@ Add btn todo
 const addBTN = document.querySelector(".addNewTask");
 //@ container list Todo
 const ul = document.querySelector(".containerList>ul");
+//! Showin active or Completed container
+const containerList = document.querySelector(".SactiveCompleted");
+// ~ active task 
+const activeBTN = document.querySelector("#activeTask");
+const campletedTask=document.querySelector("#campletedTask");
+const ul2=document.querySelector(".containerTask  ")
 //@ alert
 const alertText = document.querySelector(".alert");
 const alertINP = document.querySelector(".inputAlert");
 const closeBtn = document.querySelector(".close1");
 // import { addToDB, showTask, initDB } from "./todoDB.js";
+//~ colose btn Active or Completed container
+const closeActiveBTN = document.querySelector(".closeBTNac");
 
 // // create new element
 let inputV;
@@ -78,9 +87,19 @@ ul.addEventListener("click", (e) => {
   isCompleted(li.id, li);
   remove(li.id, li);
 });
+// ~ show active task handler
+campletedTask.addEventListener("click", () => {
+  containerList.style. visibility= "visible";
+});
+activeBTN.addEventListener("click", () => {
+  containerList.style. visibility= "visible";
+  showActiveTask(ul2)
+});
+closeActiveBTN.addEventListener("click", () => {
+  containerList.style. visibility= "hidden";
 
+});
 
-//@ get task index db and show 
 
 // let isCampleted = false;
 // ul.addEventListener("click", (e) => {

@@ -146,7 +146,7 @@ background: #45c7ff;
    background: #0000000e;
     height:14.5rem ;
 }
-.containerList ul li{
+.containerList ul li,.containerTask li{
    /* background: red; */
    border-bottom: 4px solid black;
     padding-left: 10px;
@@ -157,7 +157,7 @@ background: #45c7ff;
     cursor: pointer;
     position: relative;
 }
-.containerList ul li .check{
+.containerList ul li .check,.containerTask li .check{
     border-radius: 50%;
     width: 37px;
     height: 37px;
@@ -176,7 +176,7 @@ background: #45c7ff;
    
 
 }
-.containerList ul li h3{
+.containerList ul li h3 , .containerTask li h3{
     /* background: red; */
     margin-left: 10px;
     font-size: 40px ;
@@ -269,4 +269,40 @@ background: #45c7ff;
 }
 .completed{
     background: #ccffc3;
+}
+/* showin active or completed task */
+.SactiveCompleted{
+    position: absolute;
+    background: #ff4141bf;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+}
+.conSAOC{
+    margin-top: 3rem;
+    background: #ffd037;
+    border: 4px solid black;
+    border-radius: 34px;
+    width: 25rem;
+    height: 35rem;
+}
+.containerTask{
+    width: 100%;
+    height: 27rem;
+    border-bottom: 4px solid black;
+}
+
+.closeBTNac{
+    cursor: pointer;
+    font-size: 23px;
+    padding: 12px;
+    margin-top: 23px;
+    width: 100px;
+    background: transparent;
+    border: 4px  solid black;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-left: 35%;
 }

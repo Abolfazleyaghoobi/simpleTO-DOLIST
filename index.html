@@ -24,8 +24,8 @@
       </div>
       <div class="status">
         <button class="statusBTN all">All</button>
-        <button class="statusBTN active">Active</button>
-        <button class="statusBTN campleted">Campleted</button>
+        <button id="activeTask" class="statusBTN active">Active</button>
+        <button id="campletedTask" class="statusBTN campleted">Campleted</button>
       </div>
       <div class="addTodo">
         <div class="InputAddTodoList">
@@ -53,6 +53,21 @@
         <button class="close1">Close</button>
       </div>
     </section>
+    <!-- ~  showing active or completed -->
+    <section class="SactiveCompleted">
+      <!--@ container showin active or completed -->  
+      <div class="conSAOC">
+        <h2 style="text-align: center; border-bottom: 1px solid black;">showing active or completed task</h2>
+         <ul class="containerTask">
+
+         </ul>
+         <div>
+          <!-- colose bottom active or completed -->
+          <button class="closeBTNac">Close</button>
+         </div>
+      </div>
+    </section>
+
     <script src="./js/index.umd.js"></script>
     
     <script type="module" src="./js/app.js"></script>

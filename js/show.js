@@ -15,7 +15,7 @@ const elem=(e)=>{
 export async function showTaskT(ul){
     
 let taskArray;
-let task = await initDB()
+ await initDB()
   .then((res) => {
     return showTask();
   })
