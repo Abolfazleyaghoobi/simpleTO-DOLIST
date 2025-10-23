@@ -15,7 +15,7 @@ const elem = (e) => {
     `;
 
 };
-async function showActiveTask(ul) {
+async function showCompletedTask(ul) {
   let taskArray;
   await initDB()
     .then((res) => {
@@ -28,11 +28,11 @@ async function showActiveTask(ul) {
   if (taskArray) {
     ul.innerHTML = "";
     taskArray.forEach((e) => {
-      if (!e.isCompleted) {
+      if (e.isCompleted) {
         ul.insertAdjacentHTML("afterbegin", elem(e));
       }
     });
   }
 }
 
-export default showActiveTask;
+export default showCompletedTask;

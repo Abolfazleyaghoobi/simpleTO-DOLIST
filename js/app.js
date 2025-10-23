@@ -3,6 +3,7 @@ import { isCompleted } from "./isCompleted.js";
 import { showTaskT } from "./show.js";
 import { remove } from "./remove.js";
 import showActiveTask from "./showActive.js";
+import showCompletedTask from "./showCompleted.js";
 //@ inputea
 const inputAdd = document.querySelector(".InputAddTodoList>input");
 //@ Add btn todo
@@ -90,6 +91,7 @@ ul.addEventListener("click", (e) => {
 // ~ show active task handler
 campletedTask.addEventListener("click", () => {
   containerList.style. visibility= "visible";
+  showCompletedTask(ul2)
 });
 activeBTN.addEventListener("click", () => {
   containerList.style. visibility= "visible";
