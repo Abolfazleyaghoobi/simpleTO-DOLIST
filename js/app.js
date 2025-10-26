@@ -1,46 +1,38 @@
-import { addToDB, initDB } from "./todoDB.js";
-import { isCompleted } from "./isCompleted.js";
-import { showTaskT } from "./show.js";
-import { remove } from "./remove.js";
-import showActiveTask from "./showActive.js";
-import showCompletedTask from "./showCompleted.js";
-//@ inputea
+// Import necessary modules from various files
+import { addToDB, initDB, removeTask } from "./todoDB.js"; // Database operations
+import { isCompleted } from "./isCompleted.js"; // Task completion status
+import { showTaskT } from "./show.js"; // Task display functionality
+// import { remove } from "./remove.js"; // Note: This import is commented out
+import showActiveTask from "./showActive.js"; // Active task display
+import showCompletedTask from "./showCompleted.js"; // Completed task display
+
+//@ inputea - Input element for adding new tasks
 const inputAdd = document.querySelector(".InputAddTodoList>input");
-//@ Add btn todo
+//@ Add btn todo - Button to add new tasks
 const addBTN = document.querySelector(".addNewTask");
-//@ container list Todo
+//@ container list Todo - Main container for task list
 const ul = document.querySelector(".containerList>ul");
-//! Showin active or Completed container
+//! Showin active or Completed container - Container for filtering tasks
 const containerList = document.querySelector(".SactiveCompleted");
-// ~ active task 
+// ~ active task - Button to show active tasks
 const activeBTN = document.querySelector("#activeTask");
-const campletedTask=document.querySelector("#campletedTask");
-const ul2=document.querySelector(".containerTask  ")
-//@ alert
+const campletedTask = document.querySelector("#campletedTask"); // Button to show completed tasks
+const ul2 = document.querySelector(".containerTask  "); // Container for filtered tasks
+//@ alert - Alert notification elements
 const alertText = document.querySelector(".alert");
 const alertINP = document.querySelector(".inputAlert");
 const closeBtn = document.querySelector(".close1");
-// import { addToDB, showTask, initDB } from "./todoDB.js";
-//~ colose btn Active or Completed container
+// import { addToDB, showTask, initDB } from "./todoDB.js"; // Note: This import is commented out
+//~ colose btn Active or Completed container - Button to close filtered view
 const closeActiveBTN = document.querySelector(".closeBTNac");
 
-// // create new element
+// // create new element - Note: This section is commented out
 let inputV;
-// let newElLi;
-// function createEl() {
-//   newElLi = document.createElement("li");
-//   newElLi.innerHTML = `
-//     <div class="check">
-//     <span>
-    
-//     </span>
-//     </div>
-//     <h3>${inputV}</h3>
-//     `;
-//   ul.prepend(newElLi);
-// }
-function ali(text){
-    return `
+
+
+// Function to create HTML structure for a task
+function ali(text) {
+  return `
      <li>
             <div class="check">
               <span>
@@ -50,9 +42,10 @@ function ali(text){
               <h3>${text}</h3>
               
           </li>
-    `
+    `;
 }
-//~~ reapet text alert
+
+//~~ reapet text alert - Function for typing animation in alert
 let reapetT;
 function reapetTextAlet() {
   reapetT = new TypeIt(alertINP, {
@@ -60,7 +53,8 @@ function reapetTextAlet() {
     speed: 100,
   }).go();
 }
- //@ add new task          
+
+ //@ add new task - Event listener for adding new tasks
  addBTN.addEventListener("click", () => {
   inputV = inputAdd.value;
   if (inputV == "") {
@@ -70,90 +64,86 @@ function reapetTextAlet() {
     
      addToDB(inputV);
         // ul.innerHTML += ali(inputV);
-        showTaskT(ul);
+        showTaskT(ul); // Display the new task
           inputAdd.value = "";
  }
  });
- //~~  close window alert
+
+ //~~  close window alert - Event listener to close alert
 closeBtn.addEventListener("click", (e) => {
     reapetT.reset();
     alertText.classList.remove("showAlertContent");
     console.log(e.target);
   });
-// @ campleted task
-ul.addEventListener("click", (e) => {
+
+// @ campleted task - Event listener for task list interactions
+ul.addEventListener("click", async (e) => {
+ 
   const li = e.target.closest("li");
-  if (!li) return;
+  if (!li) return; 
+
   
-  isCompleted(li.id, li);
-  remove(li.id, li);
+  if (e.target.matches("i")) { // Check if delete icon is clicked
+    
+    e.stopPropagation(); // Prevent event bubbling
+    
+    try {
+     
+      await removeTask(li.id); // Remove task from database
+      
+      
+      li.remove(); // Remove task from DOM
+      
+      console.log(`Task ${li.id} deleted ✅`);
+    } catch (err) {
+      console.error("Error deleting task:", err);
+    }
+
+  } else {
+    
+    // --- Task completion logic ---
+    // 6. If delete icon wasn't clicked, then the task itself was clicked
+    isCompleted(li.id, li); // Toggle task completion status
+  }
 });
-// ~ show active task handler
+
+// ~ show active task handler - Event listeners for filtering tasks
 campletedTask.addEventListener("click", () => {
-  containerList.style. visibility= "visible";
-  showCompletedTask(ul2)
+  containerList.style.visibility = "visible";
+  showCompletedTask(ul2); // Show completed tasks
 });
+
 activeBTN.addEventListener("click", () => {
-  containerList.style. visibility= "visible";
-  showActiveTask(ul2)
+  containerList.style.visibility = "visible";
+  showActiveTask(ul2); // Show active tasks
 });
+
 closeActiveBTN.addEventListener("click", () => {
-  containerList.style. visibility= "hidden";
+  containerList.style.visibility = "hidden"; // Hide filtered view
 
 });
 
-
-// let isCampleted = false;
-// ul.addEventListener("click", (e) => {
-//   //%% nN=>nodeName
-//   const nN = e.target.nodeName;
-//   if (!isCampleted) {
-//     if (nN === "LI" || nN === "H3" || nN === "DIV") {
-//       newElLi.firstElementChild.innerHTML = `
-//    <i class="bi bi-check"></i>
-//    `;
-//       newElLi.lastElementChild.style.textDecoration = "line-through";
-//       newElLi.style.backgroundColor = "#ccffc3";
-//     }
-//     isCampleted = true;
-//     console.log(33);
-//   } else {
-//     isCampleted = false;
-//     newElLi.firstElementChild.innerHTML = ``;
-//     newElLi.lastElementChild.style.textDecoration = "none";
-//     newElLi.style.backgroundColor = "";
-
-//     console.log(33);
-//   }
-// });
-
-
-
-// //&&++++++++++++++scroll+++++++++++++++++++++++++++++++++++
-// let isDown = false;
-// let startY;
-// let scrollTop;
-// ul.addEventListener('mousedown', (e) => {
-//   isDown = true;
-//   startY = e.pageY - ul.offsetTop;
-//   scrollTop = ul.scrollTop;
-//   ul.style.cursor = 'grabbing';
-// });
-// ul.addEventListener('mouseleave', () => {
-//   isDown = false;
-//   ul.style.cursor = '';
-// });
-// ul.addEventListener('mouseup', () => {
-//   isDown = false;
-//   ul.style.cursor = '';
-// });
-
-// ul.addEventListener('mousemove', (e) => {
-//   if (!isDown) return;
-//   e.preventDefault();
-//   const y = e.pageY - ul.offsetTop;
-//   const walk = (y - startY) * 2; // مقدار حرکت (ضریب سرعت قابل تنظیم)
-//   ul.scrollTop = scrollTop - walk;
-// });
-initDB()
+// Initialize database and show initial tasks
+initDB();
 showTaskT(ul);
+
+// Add event listener for Enter key press on the input field
+inputAdd.addEventListener("keypress", (e) => {
+  // Check if the pressed key is Enter (key code 13)
+  if (e.key === "Enter") {
+    // Prevent default behavior (like form submission)
+    e.preventDefault();
+    
+    // Trigger the same logic as the add button click
+    inputV = inputAdd.value;
+    if (inputV == "") {
+      alertText.classList.add("showAlertContent");
+      reapetTextAlet();
+    } else {
+      addToDB(inputV);
+      showTaskT(ul);
+      inputAdd.value = "";
+    }
+  }
+});
+
