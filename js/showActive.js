@@ -10,7 +10,7 @@ const elem = (e) => {
     </span>
     </div>
     <h3 class=${e.isCompleted && "khat"}>${e.contentTask}</h3>
-    <div class="deletIcon"><i class="bi bi-trash3"></i></div>
+  
     </li>
     `;
 

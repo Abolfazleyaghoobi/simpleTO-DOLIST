@@ -194,7 +194,7 @@ box-shadow:10px 10px  #ba976e; ;
   border: 4px solid black;
   border-radius: 23px;
 }
-.containerList ul::-webkit-scrollbar {
+.containerList ul::-webkit-scrollbar ,.containerTask::-webkit-scrollbar{
   width: 0rem;
 }
 .containerList ul {
@@ -363,9 +363,12 @@ box-shadow:10px 10px  #ba976e; ;
   max-width: 25rem;
   height: 50dvh;
   min-height: 35rem;
+
 }
 
 .containerTask {
+  /* background: red; */
+  overflow-y: scroll;
   width: 100%;
   height: 27rem;
   border-bottom: 4px solid black;
@@ -385,13 +388,20 @@ box-shadow:10px 10px  #ba976e; ;
 }
 /* animation image */
 .animationImage {
+  color: red;
   animation: setting 4s linear infinite;
 }
-@keyframes setting {
+/* @keyframes setting {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
   }
+} */
+
+
+#img-bland{
+  background-blend-mode: multiply;
 }
+

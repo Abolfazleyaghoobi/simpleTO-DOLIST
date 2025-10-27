@@ -29,7 +29,6 @@ const closeActiveBTN = document.querySelector(".closeBTNac");
 // // create new element - Note: This section is commented out
 let inputV;
 
-
 // Function to create HTML structure for a task
 function ali(text) {
   return `
@@ -54,53 +53,47 @@ function reapetTextAlet() {
   }).go();
 }
 
- //@ add new task - Event listener for adding new tasks
- addBTN.addEventListener("click", () => {
+//@ add new task - Event listener for adding new tasks
+addBTN.addEventListener("click", () => {
   inputV = inputAdd.value;
   if (inputV == "") {
     alertText.classList.add("showAlertContent");
     reapetTextAlet();
-   } else {
-    
-     addToDB(inputV);
-        // ul.innerHTML += ali(inputV);
-        showTaskT(ul); // Display the new task
-          inputAdd.value = "";
- }
- });
+  } else {
+    addToDB(inputV);
+    // ul.innerHTML += ali(inputV);
+    showTaskT(ul); // Display the new task
+    inputAdd.value = "";
+  }
+});
 
- //~~  close window alert - Event listener to close alert
+//~~  close window alert - Event listener to close alert
 closeBtn.addEventListener("click", (e) => {
-    reapetT.reset();
-    alertText.classList.remove("showAlertContent");
-    console.log(e.target);
-  });
+  reapetT.reset();
+  alertText.classList.remove("showAlertContent");
+  console.log(e.target);
+});
 
 // @ campleted task - Event listener for task list interactions
 ul.addEventListener("click", async (e) => {
- 
   const li = e.target.closest("li");
-  if (!li) return; 
+  if (!li) return;
 
-  
-  if (e.target.matches("i")) { // Check if delete icon is clicked
-    
+  if (e.target.matches("i")) {
+    // Check if delete icon is clicked
+
     e.stopPropagation(); // Prevent event bubbling
-    
+
     try {
-     
       await removeTask(li.id); // Remove task from database
-      
-      
+
       li.remove(); // Remove task from DOM
-      
+
       console.log(`Task ${li.id} deleted ✅`);
     } catch (err) {
       console.error("Error deleting task:", err);
     }
-
   } else {
-    
     // --- Task completion logic ---
     // 6. If delete icon wasn't clicked, then the task itself was clicked
     isCompleted(li.id, li); // Toggle task completion status
@@ -120,7 +113,6 @@ activeBTN.addEventListener("click", () => {
 
 closeActiveBTN.addEventListener("click", () => {
   containerList.style.visibility = "hidden"; // Hide filtered view
-
 });
 
 // Initialize database and show initial tasks
@@ -133,7 +125,7 @@ inputAdd.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     // Prevent default behavior (like form submission)
     e.preventDefault();
-    
+
     // Trigger the same logic as the add button click
     inputV = inputAdd.value;
     if (inputV == "") {
@@ -146,4 +138,3 @@ inputAdd.addEventListener("keypress", (e) => {
     }
   }
 });
-
